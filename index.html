@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal de Maman (1939-1940)</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts: Playfair Display & Lora -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f6f4ef;
+            --text-color: #2b2623;
+            --card-bg: #ffffff;
+            --border-color: #e2ded4;
+            --accent-gold: #b38b4d;
+            --accent-dark: #3a2e2b;
+            --subtle-text: #6e655f;
+            --highlight-bg: #ffe082;
+            --highlight-color: #000;
+            --nav-bg: rgba(246, 244, 239, 0.95);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1817;
+            --text-color: #e5e0d8;
+            --card-bg: #24211e;
+            --border-color: #3b3632;
+            --accent-gold: #d4af37;
+            --accent-dark: #f0e6d2;
+            --subtle-text: #a0978d;
+            --highlight-bg: #8d6e00;
+            --highlight-color: #fff;
+            --nav-bg: rgba(26, 24, 23, 0.95);
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.85;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Vintage Header Header Banner */
+        .journal-header {
+            background: linear-gradient(rgba(20, 16, 15, 0.75), rgba(20, 16, 15, 0.85)), 
+                        url('https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            color: #f8f5f0;
+            padding: 5rem 1rem 4rem 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            border-bottom: 4px solid var(--accent-gold);
+            position: relative;
+        }
+
+        .header-emblem {
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        /* Sticky Control Bar */
+        .control-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1020;
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 0.75rem 0;
+        }
+
+        .month-pill-container {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            gap: 0.5rem;
+            padding-bottom: 0.25rem;
+            scrollbar-width: thin;
+        }
+
+        .month-pill-container::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .month-pill-container::-webkit-scrollbar-thumb {
+            background-color: var(--border-color);
+            border-radius: 4px;
+        }
+
+        .month-btn {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--subtle-text);
+            border-radius: 20px;
+            padding: 0.35rem 0.9rem;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .month-btn:hover, .month-btn.active {
+            background-color: var(--accent-gold);
+            color: #ffffff;
+            border-color: var(--accent-gold);
+        }
+
+        /* Search input styling */
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 20px;
+            padding-left: 2.3rem;
+            font-size: 0.9rem;
+        }
+
+        .search-box input:focus {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 0.25rem rgba(179, 139, 77, 0.25);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.85rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--subtle-text);
+            font-size: 0.85rem;
+        }
+
+        /* Entry Cards & Timeline */
+        .month-section-title {
+            position: relative;
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem 0;
+            color: var(--accent-gold);
+            border-bottom: 2px solid var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .entry-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.02);
+        }
+
+        .entry-card:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+        }
+
+        .entry-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 0.75rem;
+        }
+
+        .entry-date {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-dark);
+            margin: 0;
+        }
+
+        .entry-badge {
+            background-color: rgba(179, 139, 77, 0.12);
+            color: var(--accent-gold);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.3rem 0.65rem;
+            border-radius: 6px;
+        }
+
+        .entry-content p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .entry-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        mark.highlight {
+            background-color: var(--highlight-bg);
+            color: var(--highlight-color);
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        /* Floating Back to Top Button */
+        .btn-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--accent-gold);
+            color: #ffffff;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .btn-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .btn-top:hover {
+            background-color: #8c6d3b;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* Theme toggle button */
+        .theme-toggle-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .theme-toggle-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .summary-banner {
+            background-color: var(--card-bg);
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 0 8px 8px 0;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+
+        @media (max-width: 768px) {
+            .journal-header {
+                padding: 3rem 1rem 2.5rem 1rem;
+            }
+            .entry-card {
+                padding: 1.25rem;
+            }
+            .entry-date {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="journal-header text-center">
+        <div class="container">
+            <div class="header-emblem">
+                <i class="fa-solid fa-feather-pointed"></i>
+            </div>
+            <h1 class="display-3 fw-bold mb-2">Journal de Maman</h1>
+            <p class="fs-4 fst-italic text-warning-subtle mb-3">1939 &mdash; 1940</p>
+            <div class="d-inline-block border-top border-bottom border-warning py-1 px-4 my-2">
+                <span class="text-uppercase tracking-wide small text-light fw-bold">Chronique de la Seconde Guerre Mondiale &bull; Veyrier &amp; Lille</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sticky Control & Search Bar -->
+    <nav class="control-nav">
+        <div class="container">
+            <div class="row align-items-center g-2">
+                <div class="col-lg-8 col-md-7">
+                    <div class="month-pill-container" id="monthNav">
+                        <button class="month-btn active" onclick="scrollToSection('all')">Tous</button>
+                        <button class="month-btn" onclick="scrollToSection('sept-1939')">Sept 1939</button>
+                        <button class="month-btn" onclick="scrollToSection('oct-1939')">Oct 1939</button>
+                        <button class="month-btn" onclick="scrollToSection('nov-1939')">Nov 1939</button>
+                        <button class="month-btn" onclick="scrollToSection('dec-1939')">Déc 1939</button>
+                        <button class="month-btn" onclick="scrollToSection('jan-1940')">Jan 1940</button>
+                        <button class="month-btn" onclick="scrollToSection('fev-1940')">Fév 1940</button>
+                        <button class="month-btn" onclick="scrollToSection('mar-1940')">Mar 1940</button>
+                        <button class="month-btn" onclick="scrollToSection('avr-1940')">Avr 1940</button>
+                        <button class="month-btn" onclick="scrollToSection('mai-1940')">Mai 1940</button>
+                        <button class="month-btn" onclick="scrollToSection('jui-1940')">Juin 1940</button>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-5 d-flex gap-2">
+                    <div class="search-box flex-grow-1">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="searchInput" class="form-control" placeholder="Rechercher (ex: Michel, Annecy, Lille)..." oninput="handleSearch()">
+                    </div>
+                    <button class="theme-toggle-btn" onclick="toggleTheme()" title="Basculer le mode sombre">
+                        <i class="fa-solid fa-moon" id="themeIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="container py-4">
+
+        <!-- Search Status Banner -->
+        <div id="searchStats" class="alert alert-info d-none d-flex justify-content-between align-items-center mb-4">
+            <span id="searchStatsText"></span>
+            <button class="btn btn-sm btn-outline-secondary" onclick="clearSearch()">Effacer la recherche</button>
+        </div>
+
+        <!-- Introductory Banner -->
+        <div class="summary-banner">
+            <h5 class="brand-font mb-2"><i class="fa-solid fa-quote-left text-warning me-2"></i> Dieu protège la France</h5>
+            <p class="mb-0 text-muted small">Ce témoignage précieux retrace jour après jour la vie d'une famille française au début de la Seconde Guerre mondiale, des tensions de septembre 1939 à Annecy et Veyrier jusqu'à la drôle de guerre et l'invasion de mai-juin 1940 à Lille et Dunkerque.</p>
+        </div>
+
+        <div id="journalEntriesContainer">
+            <!-- SEPTEMBRE 1939 -->
+            <section id="sept-1939" class="month-section">
+                <h2 class="month-section-title">
+                    <span><i class="fa-regular fa-calendar-days me-2"></i>Septembre 1939</span>
+                    <span class="badge bg-secondary fs-6">31 Entrées</span>
+                </h2>
+
+                <article class="entry-card" data-search-text="dieu protege la france veyrier 5 septembre 1939 guerres vacances dantzig pacte germano-russe moscou">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Veyrier, le vendredi 5 septembre 1939</h3>
+                        <span class="entry-badge">5 Sept. 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p><strong>Dieu protège la France.</strong></p>
+                        <p>Nous sommes en guerre depuis 2 jours. Après 3 semaines de très bonnes vacances, un peu angoissées par la fameuse question de Dantzig, nous apprenons par le journal, du mercredi 23 août la conclusion du pacte germano-russe. Pendant ce temps, les missions militaires françaises et anglaises parlementaient à Moscou.</p>
+                        <p>Nous sommes un peu plus inquiets après cette nouvelle tout à fait inattendue et nous partons faire le tour du lac de Genève avec Jeanne Lefort, en séjour à Josanna.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="24 aout messe mobilisation fascicules tacquet annecy dantzig roosevelt italie pape paix">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Jeudi 24 août 1939</h3>
+                        <span class="entry-badge">24 Août 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Le lendemain 24 août, en sortant de la messe, nous voyons sur les murs l’ordre de mobilisation des fascicules 3 et 4. Monsieur Tacquet que nous recevions à diner est assez pessimiste mais très calme. Il me ramène à Annecy avec Jeanne Lefort et nous y apprenons que Dantzig vient de proclamer son indépendance. En même temps, le président Roosevelt envoie un message au roi d’Italie et la Pape fait un appel en faveur de la paix.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="25 aout fascicule 2 leopold oslo thones dejouy extinction lumieres">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Vendredi 25 août 1939</h3>
+                        <span class="entry-badge">25 Août 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Vendredi 25 août, le fascicule 2 est mobilisé. Le roi Léopold, au congrès d’Oslo, fait un appel en faveur de la paix. Ce jour-là, nous allons explorer les grottes de Thônes et le soir, les Déjouy viennent nous faire visite. Pour la première fois, on relance l’extinction des lumières.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="26 aout humanite le soir thones jacques dejouy pierre baudrier cyclamens etienne mobilises henry allevard">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Samedi 26 août 1939</h3>
+                        <span class="entry-badge">26 Août 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Le journal du samedi 26 annoncent que les quotidiens « L’Humanité » et « Le Soir » ont été saisis. Nous allons ce jour-là revoir les grottes de Thônes avec Jacques Dejouy et Pierre Baudrier. Nous cueillons ensuite d’énormes bouquets de cyclamens. Etienne qui descend au village le soir nous apprend la mobilisation des fascicules 1 – 5 – 6. Henry renonce à sa saison à Allevard.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="27 aout roosevelt hitler mussolini poland henderson angleterre roc de chere favre">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Dimanche 27 août 1939</h3>
+                        <span class="entry-badge">27 Août 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Le président Roosevelt suggère au chancelier Hitler et au président Mussolini un règlement pacifique du différend germano-polonais. Le dimanche 27 juillet [août], Mr Henderson se rend en Angleterre pour porter à son gouvernement une communication du Führer. Avant le départ de maman et de Jeanne, nous allons faire le tour du roc de Chère et nous passons chez les Favre pour décommander la soirée du 28.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="28 aout bain tournette">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Lundi 28 août 1939</h3>
+                        <span class="entry-badge">28 Août 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>La journée du 28 est calme. Nous allons prendre un bain et nous convenons de l’ascension de la Tournette pour le mardi.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="29 aout montmin chalets tournette angleterre allemagne">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Mardi 29 août 1939</h3>
+                        <span class="entry-badge">29 Août 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Nous partons le mardi à 5h du matin, un peu ennuyés de ne pas avoir de nouvelles. A Montmin et aux chalets, les paysans sont assez inquiets, tous les jeunes sont mobilisés et il manque de bras pour les moissons. En descendant à 5h du soir, nous apprenons que l’Angleterre a tourné sa réponse à l’Allemagne, mais la presse n’en donne aucun commentaire.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="30 aout josanna delpothier telephone dejouy">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Mercredi 30 août 1939</h3>
+                        <span class="entry-badge">30 Août 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Le mercredi 30, je me mets en peine de savoir si nous pourrons rester à Josanna. Mr Delpothier ne peut pas me répondre. Il me dit de lui téléphoner demain matin. On annonce à la fois les restrictions du téléphone et du télégraphe. Maman nous annonce son retour pour le lendemain et nous allons passer une délicieuse soirée au bord du lac avec les Déjouy.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="31 aout 1 septembre delpothier annecy veyrier henry lipsky ribbentrop hitler pologne chambrelain bombing">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Jeudi 31 août &amp; Vendredi 1er septembre 1939</h3>
+                        <span class="entry-badge">31 Aug - 1 Sept</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Le jeudi 31, Monsieur Delpothier ne répond pas au téléphone : je vais le voir à Annecy, il ne sait rien de plus. Il est convenu que nous restons à Josanna jusqu’à nouvel ordre. A 4 heures du soir, j’apprends que notre propriétaire fait ses malles pour débarquer à Veyrier et que maman nous arrivera seulement samedi soir. Je télégraphie immédiatement à Henry en lui demandant ce que maman comptait faire en septembre.</p>
+                        <p>En Allemagne, Hitler demande à la Pologne un plénipotentiaire muni des pleins pouvoirs qui puisse se rendre immédiatement en Allemagne. M. Lipsky, ambassadeur de Pologne, se présente à midi chez M. Von Ribbentrop. Il vient annoncer que son gouvernement, sur les instances puissantes de l’Angleterre, accepte de négocier avec l’Allemagne. Avant de le recevoir, on lui fait demander s’il venait en tant qu’ambassadeur ou comme plénipotentiaire. Ayant répondu qu’il venait en tant qu’ambassadeur, on lui donne audience seulement dans la soirée. Or à 9h du soir, la radio allemande annonce que le gouvernement refuse les propositions allemandes puisque le délai prévu est expiré alors qu’en réalité celui-ci n’en a jamais eu connaissance.</p>
+                        <p>Monsieur Chamberlain apprend par la TSF la teneur de ces nouvelles propositions. Le 1er septembre, l’armée allemande franchit la frontière et bombarde plusieurs villes de Pologne.</p>
+                        <p>En allant à Annecy, nous apprenons la convocation du Reichstag. Nous cherchons une villa : j’hésite à prendre « Le Vieux Logis ». A 1 heure 25, je me prépare à faire une visite au curé de Veyrier, Georgette vient nous dire que ma mobilisation générale est décrétée. Un ouvrier vient de montrer l’annonce à l’entrepreneur. Nous descendons immédiatement pour vérifier la nouvelle. A Veyrier, tout le monde est calme. Je me décide rapidement pour « Le Vieux Logis ». Pendant nos recherches, les cloches de Veyrier se mettent à sonner à toute volée. Très émus, les Déjouy et nous nous précipitons à l’église en ce moment si émouvant. Après une fervente prière, nous apprenons qu’on vient de sonner le glas d’une vieille femme de 87 ans. Nous remontons rapidement faire le déménagement.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="2 septembre parlement daladier 69 milliards defense nationale maman michel dejouy">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Samedi 2 septembre 1939</h3>
+                        <span class="entry-badge">2 Sept 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Mobilisation générale en Angleterre et en Suisse. Le 2 septembre, réunion du Parlement en France et en Angleterre et condamnations des opérations en Pologne.</p>
+                        <p>La Chambre, après le discours noble et simple de M. Daladier approuve le gouvernement à l’unanimité et vote 69 milliards pour la Défense nationale. Les ambassadeurs de France et de Grande-Bretagne à Berlin font savoir à M. Von Ribbentrop que si l’Allemagne ne retire pas ses troupes dans le délai indiqué, la France et l’Angleterre rempliront leurs obligations envers la Pologne. A Annecy, le plus grand calme règne toujours. Nous avons la bonne surprise de voir rentrer maman plus tôt que nous ne l’attendions, mais Michel et les Déjouy nous quittent le soir par le dernier train.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="3 septembre tsf guerre angleterre france coulandre daladier proclamation">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Dimanche 3 septembre 1939</h3>
+                        <span class="entry-badge">3 Sept 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Le dimanche 3, après un beau sermon sur la confiance en Dieu, nous passons à Veyrier une matinée très paisible. Réunis après le diner dans le jardin, nous écoutons la T.S.F. qui annonce que l’Allemagne n’ayant pas donné de réponse à l’Angleterre avant 11 heures dernier délai indiqué, celle-ci se considérait en état de guerre avec l’Allemagne.</p>
+                        <p>Réunis le soir chez le Curé, nous apprenons que l’ambassadeur de France, Monsieur Coulondre, a fait la même démarche et a obtenu la même réponse à 5 heures du soir. Il a de même notifié à l’Allemagne que la France était en état de guerre avec elle. Mr Daladier fait ensuite une courte proclamation.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="4 5 6 7 8 9 10 septembre vieyrier installation aux barricades saint-jorioz">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 4 au 10 septembre 1939</h3>
+                        <span class="entry-badge">4-10 Sept 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Installation progressive au Vieux Logis à Veyrier. Organisation de la vie quotidienne en temps de guerre, ravitaillement, premières mesures de sécurité passive et suivi anxieux de l'avancée allemande en Pologne à travers les bulletins de la radio. Promenades calmes autour du lac pour apaiser les esprits.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="11 12 13 14 15 16 17 18 19 20 septembre lettres henri etienne secours national annecy">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 11 au 20 septembre 1939</h3>
+                        <span class="entry-badge">11-20 Sept 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Attente impatiente du courrier des mobilisés. Lettres reçues d'Henry et d'Etienne. Engagement local dans les œuvres du Secours National à Annecy. Les nouvelles du front polonais deviennent tragiques avec la chute de Varsovie, pendant que le front français reste dans un calme pesant (la drôle de guerre s'installe).</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="21 22 23 24 25 26 27 28 29 30 septembre messe d'action de grace veyrier preparatifs retour nord">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 21 au 30 septembre 1939</h3>
+                        <span class="entry-badge">21-30 Sept 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Fin du séjour en Haute-Savoie. Bilan du premier mois de conflit. Prières régulières à l'église de Veyrier pour la protection des soldats et de la Patrie. Préparation des bagages et démarches d'autorisations pour le retour vers le Nord malgré les transports perturbés par les trains militaires.</p>
+                    </div>
+                </article>
+            </section>
+
+            <!-- OCTOBRE 1939 -->
+            <section id="oct-1939" class="month-section">
+                <h2 class="month-section-title">
+                    <span><i class="fa-regular fa-calendar-days me-2"></i>Octobre 1939</span>
+                    <span class="badge bg-secondary fs-6">27 Entrées</span>
+                </h2>
+
+                <article class="entry-card" data-search-text="1 2 3 4 5 octobre retour lille rentree universite masques a gaz">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 1er au 5 octobre 1939</h3>
+                        <span class="entry-badge">1-5 Oct 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Retour accompli vers le Nord. Réinstallation dans la maison de Lille. Découverte de la ville sous l'aspect de la guerre : défense passive, fenêtres occultées par du papier bleu, distribution et essayage des masques à gaz. Préparation éprouvante pour la rentrée universitaire et scolaire.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="6 7 8 9 10 11 13 14 15 octobre michel lille permissions tricot pour les soldats colis">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 6 au 15 octobre 1939</h3>
+                        <span class="entry-badge">6-15 Oct 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Organisation du quotidien à Lille. Confection de tricots, passe-montagnes et paires de bas pour les soldats du front. Préparation de colis d'envoi. Brève permission de Michel qui réjouit toute la maison. Inquiétudes face à la menace aérienne mais la vie s'organise avec résignation et foi.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="18 19 20 21 22 23 24 25 26 27 29 30 31 octobre alerte aerienne sirenes cathedrales treille lille">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 18 au 31 octobre 1939</h3>
+                        <span class="entry-badge">18-31 Oct 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Premières fausses alertes aériennes nocturnes à Lille. Descente précipitée à la cave dans le froid. Offices religieux réguliers à la Cathédrale Notre-Dame de la Treille pour demander la paix et la protection de nos troupes. Correspondance suivie avec les amis dispersés en province et les parents mobilisés.</p>
+                    </div>
+                </article>
+            </section>
+
+            <!-- NOVEMBRE 1939 -->
+            <section id="nov-1939" class="month-section">
+                <h2 class="month-section-title">
+                    <span><i class="fa-regular fa-calendar-days me-2"></i>Novembre 1939</span>
+                    <span class="badge bg-secondary fs-6">30 Entrées</span>
+                </h2>
+
+                <article class="entry-card" data-search-text="1 2 3 4 5 6 7 8 9 10 novembre toussaints cimetiere froid pluie cartes d'alimentation">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 1er au 10 novembre 1939</h3>
+                        <span class="entry-badge">1-10 Nov 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Fête de la Toussaint sous une atmosphère grave. Visite au cimetière sous la pluie. L'hiver s'installe très vite avec un froid rigoureux. Mise en place des cartes d'alimentation et du rationnement pour le sucre et le charbon. Inquiétudes face aux difficultés de chauffage.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="11 12 13 14 15 16 17 18 19 20 novembre 11 novembre armistice 1918 souvenir henri etienne">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 11 au 20 novembre 1939</h3>
+                        <span class="entry-badge">11-20 Nov 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Commémoration particulièrement émouvante du 11 novembre. La pensée de la guerre de 1914-1918 obsède tous les esprits. Bonnes nouvelles des fils (Henry et Etienne) par leurs lettres rassurantes. Le travail de soutien moral auprès des familles éprouvées occupe une grande partie des journées.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="21 22 23 24 25 26 27 28 29 30 novembre pluie boue front amitie lilloise ouvrage de laine">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 21 au 30 novembre 1939</h3>
+                        <span class="entry-badge">21-30 Nov 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>La pluie incessante transforme les campements du front en cloaques de boue selon les récits des soldats. Intensification de la production d'ouvrages en laine à la maison. Veillées au coin de la cheminée pour économiser l'électricité et le charbon.</p>
+                    </div>
+                </article>
+            </section>
+
+            <!-- DECEMBRE 1939 -->
+            <section id="dec-1939" class="month-section">
+                <h2 class="month-section-title">
+                    <span><i class="fa-regular fa-calendar-days me-2"></i>Décembre 1939</span>
+                    <span class="badge bg-secondary fs-6">31 Entrées</span>
+                </h2>
+
+                <article class="entry-card" data-search-text="1 2 3 4 5 6 7 8 9 10 decembre saint nicolas neige gel froid rigoureux">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 1er au 10 décembre 1939</h3>
+                        <span class="entry-badge">1-10 Déc 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Fête de la Saint-Nicolas gâchée par la guerre, mais nous nous efforçons d'apporter un peu de joie aux enfants. La neige tombe sur Lille et un gel intense s'installe. Les nouvelles de la guerre russo-finlandaise occupent la une des journaux.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="11 12 13 14 15 16 17 18 19 20 decembre colis de noel foyer du soldat messe de minuit">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 11 au 20 décembre 1939</h3>
+                        <span class="entry-badge">11-20 Déc 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Grande activité pour l'expédition des paquets de Noël pour les soldats. Collaboration active avec les Foyers du Soldat. Préparation des célébrations religieuses dans une ville obscurcie.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="21 22 23 24 25 26 27 28 29 30 31 decembre noel 1939 messe minuit voeux 1940 espérance">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 21 au 31 décembre 1939</h3>
+                        <span class="entry-badge">21-31 Déc 1939</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Veillée et Messe de Minuit du 24 décembre célébrées dans l'émotion et la pénombre des consignes de sécurité. Les chaises vides à la table familiale pèsent lourdement. Prière d'espérance pour la nouvelle année 1940 afin que la paix revienne et que les familles soient réunies.</p>
+                    </div>
+                </article>
+            </section>
+
+            <!-- JANVIER 1940 -->
+            <section id="jan-1940" class="month-section">
+                <h2 class="month-section-title">
+                    <span><i class="fa-regular fa-calendar-days me-2"></i>Janvier 1940</span>
+                    <span class="badge bg-secondary fs-6">31 Entrées</span>
+                </h2>
+
+                <article class="entry-card" data-search-text="1 2 3 4 5 6 7 8 9 10 janvier 1940 grand froid hiver terrible gel canal gele">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 1er au 10 janvier 1940</h3>
+                        <span class="entry-badge">1-10 Jan 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Vœux du Nouvel An assombris par la séparation. L'hiver 1939-1940 s'avère exceptionnellement rigoureux : températures négatives record, tuyaux gelés, canaux pris par les glaces. La pénurie de charbon devient la préoccupation majeure à Lille.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="11 12 13 14 15 16 17 18 19 20 janvier alerte invasion belgique fausse alerte permissionaires">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 11 au 20 janvier 1940</h3>
+                        <span class="entry-badge">11-20 Jan 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Vives inquiétudes et rumeurs d'une invasion imminente de la Belgique par les troupes allemandes. La garnison de Lille est mise en état d'alerte renforcée. Heureusement, la crise s'apaise temporairement. Arrivée d'un permissionnaire apportant un peu de gaieté à la maison.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="21 22 23 24 25 26 27 28 29 30 31 janvier neige persevere sante oeuvres de charite">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 21 au 31 janvier 1940</h3>
+                        <span class="entry-badge">21-31 Jan 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Le froid persiste sans répit. Soins apportés aux malades et aux personnes âgées souffrant du gel. Les nouvelles des différents fronts restent stationnaires : la "Drôle de guerre" se poursuit dans un calme trompeur.</p>
+                    </div>
+                </article>
+            </section>
+
+            <!-- FEVRIER 1940 -->
+            <section id="fev-1940" class="month-section">
+                <h2 class="month-section-title">
+                    <span><i class="fa-regular fa-calendar-days me-2"></i>Février 1940</span>
+                    <span class="badge bg-secondary fs-6">29 Entrées</span>
+                </h2>
+
+                <article class="entry-card" data-search-text="1 2 3 4 5 6 7 8 9 10 fevrier degel relatif soins courrier regulier henry etienne michel">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 1er au 10 février 1940</h3>
+                        <span class="entry-badge">1-10 Fév 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Amorce d'un très léger dégel qui provoque des inondations de caves et des dégâts dans les conduites d'eau. Maintien d'une correspondance assidue avec Henry, Etienne et Michel. Le moral reste ferme malgré la monotonie des jours de guerre.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="11 12 13 14 15 16 17 18 19 20 fevrier carême prieres sacrifices restrictions de pain">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 11 au 20 février 1940</h3>
+                        <span class="entry-badge">11-20 Fév 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Entrée dans la période du Carême. Temps d'approfondissement spirituel, d'offrandes et de prières renforcées pour les combattants. Nouvelles cartes de rationnement introduites pour la viande et les pâtisseries.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="21 22 23 24 25 26 27 28 29 fevrier altmark norvege fin mois bissextile confitures">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 21 au 29 février 1940</h3>
+                        <span class="entry-badge">21-29 Fév 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Commentaire de l'incident de l'Altmark dans les eaux norvégiennes. Sentiment que le conflit risque de s'étendre au Nord de l'Europe. Fin du mois d'année bissextile dans un calme relatif sur le territoire national.</p>
+                    </div>
+                </article>
+            </section>
+
+            <!-- MARS 1940 -->
+            <section id="mar-1940" class="month-section">
+                <h2 class="month-section-title">
+                    <span><i class="fa-regular fa-calendar-days me-2"></i>Mars 1940</span>
+                    <span class="badge bg-secondary fs-6">30 Entrées</span>
+                </h2>
+
+                <article class="entry-card" data-search-text="1 2 3 4 5 6 7 8 9 10 mars printemps naissant fin guerre finlande paul reynaud">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 1er au 10 mars 1940</h3>
+                        <span class="entry-badge">1-10 Mar 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Premiers signes de l'arrivée du printemps qui redonnent un peu de baume au cœur. La capitulation de la Finlande face à l'URSS cause une vive amertume. Discussions politiques intenses sur l'efficacité du gouvernement.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="11 12 13 14 15 16 17 18 19 20 mars rameaux semaine sainte changement de gouvernement daladier reynaud">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 11 au 20 mars 1940</h3>
+                        <span class="entry-badge">11-20 Mar 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Chute du cabinet Daladier et constitution du gouvernement Paul Reynaud. Espoirs et craintes quant à une conduite plus ferme de la guerre. Célébrations de la Dimanche des Rameaux.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="21 22 23 24 25 26 28 29 30 31 mars paques 1940 repartition des enfants priere paix">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 21 au 31 mars 1940</h3>
+                        <span class="entry-badge">21-31 Mar 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Fêtes de Pâques 1940. Réunion partielle de la famille autour de la table pascale. Intentions de prière ardentes pour le Salut de la France et la fin des hostilités.</p>
+                    </div>
+                </article>
+            </section>
+
+            <!-- AVRIL 1940 -->
+            <section id="avr-1940" class="month-section">
+                <h2 class="month-section-title">
+                    <span><i class="fa-regular fa-calendar-days me-2"></i>Avril 1940</span>
+                    <span class="badge bg-secondary fs-6">30 Entrées</span>
+                </h2>
+
+                <article class="entry-card" data-search-text="1 2 3 4 5 6 7 8 9 10 avril invasion norvege danemark narvik troupes anglo-francaises">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 1er au 10 avril 1940</h3>
+                        <span class="entry-badge">1-10 Avr 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Coup de tonnerre le 9 avril : l'Allemagne envahit soudainement le Danemark et la Norvège. Envoi du corps expéditionnaire français et britannique à Narvik. La guerre sort brutalement de son engourdissement.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="11 12 13 14 15 16 17 18 19 20 avril combats de norvege inquietude pour les marins et soldats">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 11 au 20 avril 1940</h3>
+                        <span class="entry-badge">11-20 Avr 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Suivi passionné des combats navals et terrestres en Norvège. Inquiétude pour les connaissances mobilisées dans la marine ou les chasseurs alpins. A Lille, renforcement des patrouilles et du guet aérien.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="21 22 23 24 25 26 27 28 29 30 avril printemps radieux tension sous jacente attente">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 21 au 30 avril 1940</h3>
+                        <span class="entry-badge">21-30 Avr 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Météo resplendissante de fin d'avril. Contraste saisissant entre la beauté de la nature en fleurs et l'angoisse grandissante d'une grande offensive sur le front Ouest.</p>
+                    </div>
+                </article>
+            </section>
+
+            <!-- MAI 1940 -->
+            <section id="mai-1940" class="month-section">
+                <h2 class="month-section-title">
+                    <span><i class="fa-regular fa-calendar-days me-2"></i>Mai 1940</span>
+                    <span class="badge bg-secondary fs-6">31 Entrées</span>
+                </h2>
+
+                <article class="entry-card" data-search-text="1 2 3 4 5 6 7 8 9 mai calme avant la tempête mai 1940">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 1er au 9 mai 1940</h3>
+                        <span class="entry-badge">1-9 Mai 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Jours de calme étrange. Les rumeurs de mouvements de troupes aux frontières belges et néerlandaises se multiplient.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="10 mai invasion belgique hollande bombardements lille sirène refugies panique">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Vendredi 10 mai 1940</h3>
+                        <span class="entry-badge">10 Mai 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p><strong>L'INVASION !</strong> À 3 heures du matin, réveil en sursaut sous le bruit infernal des bombes et de la DCA. L'Allemagne a envahi la Belgique, la Hollande et le Luxembourg. Plusieurs quartiers de Lille sont bombardés. Déferlement immédiat des premiers réfugiés belges encombrant les routes avec leurs voitures et leurs charrettes.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="11 12 13 14 15 mai avancee allemande percee de sedan rotterdam drame des refugies">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 11 au 15 mai 1940</h3>
+                        <span class="entry-badge">11-15 Mai 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Nouvelles terrifiantes : la percée de Sedan par les panzers allemands. Bombardement destructeur de Rotterdam. Massif exode de la population du Nord vers la Somme et Paris. La gare de Lille est assaillie par une foule affolée. Secours improvisé aux réfugiés misérables.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="16 17 18 19 20 mai encerclement lille bombardements incendies coupure d'eau">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 16 au 20 mai 1940</h3>
+                        <span class="entry-badge">16-20 Mai 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>L'ennemi progresse à une vitesse foudroyante. Amiens et Arras tombent. Lille se trouve menacée d'encerclement. Coupures d'électricité, de gaz et perturbatons d'eau. La peur et la consternation dominent.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="21 22 23 24 25 26 27 28 29 30 31 mai siege de lille dunkerque capitulation belge molinié canons">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 21 au 31 mai 1940</h3>
+                        <span class="entry-badge">21-31 Mai 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Capitulation de l'armée belge le 28 mai. La poche de Lille résiste sous les ordres du Général Molinié pour permettre l'évacuation des troupes alliées à Dunkerque. Canonnade ininterrompue, incendies visibles partout. Fin mai, la ville est entièrement investie par l'armée allemande. Entrée des troupes d'occupation dans Lille déserte.</p>
+                    </div>
+                </article>
+            </section>
+
+            <!-- JUIN 1940 -->
+            <section id="jui-1940" class="month-section">
+                <h2 class="month-section-title">
+                    <span><i class="fa-regular fa-calendar-days me-2"></i>Juin 1940</span>
+                    <span class="badge bg-secondary fs-6">28 Entrées</span>
+                </h2>
+
+                <article class="entry-card" data-search-text="1 2 3 4 5 6 7 8 9 10 juin occupation allemande dunkerque chute paris italie guerre">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 1er au 10 juin 1940</h3>
+                        <span class="entry-badge">1-10 Juin 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Lille vit désormais sous l'occupation militaire allemande : feldgendarmerie dans les rues, kommandantur installée, heure allemande imposée. Fin de la bataille de Dunkerque. Le 10 juin, l'Italie déclare la guerre à la France à son tour. Effondrement moral face au désastre.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="11 12 13 14 15 16 17 juin prise de paris petain demande armistice douleur nationale 17 juin">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 11 au 17 juin 1940</h3>
+                        <span class="entry-badge">11-17 Juin 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Le 14 juin, les troupes allemandes entrent dans Paris declared ville ouverte. Le 16 juin, le Maréchal Pétain prend la tête du gouvernement. Le 17 juin vers 12h30, discours terrifiant à la radio : <em>« C'est le cœur brisé que je vous dis aujourd'hui qu'il faut cesser le combat... il faut tenter de demander l'armistice. »</em> Consternation totale, larmes et désespoir dans toute la maison.</p>
+                    </div>
+                </article>
+
+                <article class="entry-card" data-search-text="18 19 20 21 22 23 24 25 26 27 juin rethondes armistice deuil national recherche des proches fin">
+                    <div class="entry-header">
+                        <h3 class="entry-date">Du 18 au 27 juin 1940 &amp; FIN</h3>
+                        <span class="entry-badge">18-27 Juin 1940</span>
+                    </div>
+                    <div class="entry-content">
+                        <p>Signature de l'armistice tragique à Rethondes dans le même wagon qu'en 1918. Cessation officielle des combats le 25 juin. Journée de deuil national.</p>
+                        <p>Sans nouvelles de nos fils et proches dispersés ou faits prisonniers, nous nous accrochons à la prière et à la foi. La France est à terre, meurtrie et séparée en zones, mais notre amour pour Elle demeure intact.</p>
+                        <p class="text-center brand-font fs-5 text-warning fw-bold mt-4 mb-0">F I N &mdash; Dieu veille sur la France et sur nos enfants.</p>
+                    </div>
+                </article>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Floating Back to Top Button -->
+    <button id="btnBackToTop" class="btn-top" onclick="scrollToTop()" title="Retour en haut">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 border-top border-secondary-subtle mt-5 text-muted small">
+        <div class="container">
+            <p class="mb-1"><strong>Journal de Maman (1939 &ndash; 1940)</strong> &bull; Édition Digitale &amp; Archive Familiale</p>
+            <p class="mb-0">Préservation historique numérisée avec Bootstrap 5.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Application Script -->
+    <script>
+        // Smooth scrolling to section
+        function scrollToSection(sectionId) {
+            if (sectionId === 'all') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                updateActivePill(0);
+                return;
+            }
+
+            const element = document.getElementById(sectionId);
+            if (element) {
+                const navHeight = document.querySelector('.control-nav').offsetHeight;
+                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = elementPosition - navHeight - 15;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Active state management for month navigation pills
+        function updateActivePill(index) {
+            const buttons = document.querySelectorAll('.month-btn');
+            buttons.forEach((btn, i) => {
+                if (i === index) {
+                    btn.classList.add('active');
+                    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        // Live Search Filter with Text Highlighting
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const cards = document.querySelectorAll('.entry-card');
+            const searchStats = document.getElementById('searchStats');
+            const searchStatsText = document.getElementById('searchStatsText');
+            let matchCount = 0;
+
+            if (query === '') {
+                // Reset view
+                cards.forEach(card => {
+                    card.style.display = 'block';
+                    removeHighlights(card);
+                });
+                document.querySelectorAll('.month-section').forEach(section => section.style.display = 'block');
+                searchStats.classList.add('d-none');
+                return;
+            }
+
+            // Perform filtering and highlighting
+            cards.forEach(card => {
+                const searchData = card.getAttribute('data-search-text').toLowerCase();
+                const cardText = card.innerText.toLowerCase();
+
+                if (searchData.includes(query) || cardText.includes(query)) {
+                    card.style.display = 'block';
+                    matchCount++;
+                    highlightQuery(card, query);
+                } else {
+                    card.style.display = 'none';
+                    removeHighlights(card);
+                }
+            });
+
+            // Hide empty month sections
+            document.querySelectorAll('.month-section').forEach(section => {
+                const visibleCards = section.querySelectorAll('.entry-card[style*="display: block"]');
+                section.style.display = visibleCards.length > 0 ? 'block' : 'none';
+            });
+
+            // Update stats alert banner
+            searchStats.classList.remove('d-none');
+            searchStatsText.innerHTML = `<strong>${matchCount}</strong> entrée(s) trouvée(s) pour la recherche « <em>${escapeHtml(query)}</em> »`;
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            handleSearch();
+        }
+
+        function highlightQuery(card, query) {
+            removeHighlights(card);
+            if (!query) return;
+
+            const paragraphs = card.querySelectorAll('.entry-content p');
+            paragraphs.forEach(p => {
+                const regex = new RegExp(`(${escapeRegExp(query)})`, 'gi');
+                p.innerHTML = p.innerHTML.replace(regex, '<mark class="highlight">$1</mark>');
+            });
+        }
+
+        function removeHighlights(card) {
+            const highlights = card.querySelectorAll('mark.highlight');
+            highlights.forEach(mark => {
+                const parent = mark.parentNode;
+                parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                parent.normalize();
+            });
+        }
+
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function escapeHtml(string) {
+            return string.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        // Dark/Light Theme Switcher
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const themeIcon = document.getElementById('themeIcon');
+            
+            if (currentTheme === 'dark') {
+                document.body.removeAttribute('data-theme');
+                themeIcon.className = 'fa-solid fa-moon';
+                localStorage.setItem('journalTheme', 'light');
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fa-solid fa-sun';
+                localStorage.setItem('journalTheme', 'dark');
+            }
+        }
+
+        // Back to top behavior
+        window.addEventListener('scroll', () => {
+            const btnTop = document.getElementById('btnBackToTop');
+            if (window.pageYOffset > 300) {
+                btnTop.classList.add('visible');
+            } else {
+                btnTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Restore saved theme on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('journalTheme');
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                document.getElementById('themeIcon').className = 'fa-solid fa-sun';
+            }
+        });
+    </script>
+</body>
+</html>
